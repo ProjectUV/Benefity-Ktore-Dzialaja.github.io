@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wnioski i rekomendacje — Świadczenia pozafinansowe a produktywność</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1A241E;
+    --paper:#EFEFE6;
+    --paper-alt:#E5E4D6;
+    --brass:#B08A4E;
+    --green:#2F6B4F;
+    --line: rgba(26,36,30,0.14);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+
+  .eyebrow{
+    font-family:'Space Grotesk', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    font-size:0.75rem;
+    color:var(--green);
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0;
+  }
+
+  header.site{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1.5rem 6vw;
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:0;
+    background:rgba(239,239,230,0.9);
+    backdrop-filter:blur(6px);
+    z-index:10;
+  }
+
+  header.site .mark{
+    font-family:'Space Grotesk', monospace;
+    font-size:0.85rem;
+    letter-spacing:0.05em;
+  }
+
+  header.site nav a{
+    text-decoration:none;
+    font-size:0.85rem;
+    margin-left:1.75rem;
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:border-color .2s ease;
+  }
+  header.site nav a:hover{border-color:var(--brass);}
+
+  .hero{
+    padding:8vh 6vw 10vh;
+    max-width:900px;
+  }
+
+  .hero h1{
+    font-size:clamp(2.2rem, 5vw, 3.6rem);
+    line-height:1.12;
+    margin-top:0.9rem;
+    letter-spacing:-0.01em;
+  }
+
+  .hero .thesis-mark{
+    display:inline-block;
+    color:var(--brass);
+  }
+
+  .hero p.lede{
+    max-width:56ch;
+    margin-top:1.6rem;
+    font-size:1.05rem;
+    color:#3B463F;
+  }
+
+  .intro{
+    max-width:820px;
+  }
+
+  .intro p{
+    margin:0 0 1.1rem;
+    font-size:1.02rem;
+    color:#26312B;
+  }
+
+  .intro p:last-child{margin-bottom:0;}
+
+  .intro .benefit-examples{
+    font-family:'Space Grotesk', monospace;
+    font-size:0.85rem;
+    color:var(--green);
+    background:var(--paper-alt);
+    border:1px solid var(--line);
+    padding:1rem 1.2rem;
+    border-radius:4px;
+    margin:1.4rem 0;
+    line-height:1.8;
+  }
+
+  .letter{
+    max-width:780px;
+    border-left:3px solid var(--brass);
+    padding-left:1.6rem;
+    margin-bottom:3rem;
+  }
+
+  .letter p{
+    margin:0 0 1.1rem;
+    font-size:1.02rem;
+    color:#26312B;
+  }
+  .letter p:last-child{margin-bottom:0;}
+
+  .letter .signoff{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    margin-top:1.4rem;
+  }
+
+  section{
+    padding:6vh 6vw;
+    border-top:1px solid var(--line);
+  }
+
+  section .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:2.5rem;
+    flex-wrap:wrap;
+    gap:0.5rem;
+  }
+
+  section .section-head h2{
+    font-size:1.9rem;
+  }
+
+  /* Findings — ledger style with weight bars */
+  .findings{
+    display:flex;
+    flex-direction:column;
+    max-width:900px;
+  }
+
+  .finding{
+    display:grid;
+    grid-template-columns:1fr 180px;
+    gap:2rem;
+    align-items:center;
+    padding:1.4rem 0;
+    border-top:1px solid var(--line);
+  }
+  .finding:last-child{border-bottom:1px solid var(--line);}
+
+  .finding p{
+    margin:0;
+    font-size:1.02rem;
+  }
+
+  .weight{
+    display:flex;
+    flex-direction:column;
+    gap:0.35rem;
+  }
+
+  .weight-label{
+    font-family:'Space Grotesk', monospace;
+    font-size:0.7rem;
+    color:#6b7268;
+    letter-spacing:0.06em;
+  }
+
+  .weight-track{
+    height:6px;
+    background:var(--paper-alt);
+    border-radius:3px;
+    overflow:hidden;
+  }
+
+  .weight-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--green), var(--brass));
+    border-radius:3px;
+  }
+
+  /* Recommendations */
+  .recs{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+    gap:1.5px;
+    max-width:1100px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+
+  .rec{
+    background:var(--paper);
+    padding:1.8rem 1.6rem;
+  }
+
+  .rec .num{
+    font-family:'Fraunces', serif;
+    font-size:1.6rem;
+    color:var(--brass);
+    display:block;
+    margin-bottom:0.6rem;
+  }
+
+  .rec h3{
+    font-size:1.05rem;
+    font-weight:500;
+    margin-bottom:0.5rem;
+  }
+
+  .rec p{
+    margin:0;
+    font-size:0.92rem;
+    color:#3B463F;
+  }
+
+  /* Gallery */
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1rem;
+    max-width:1100px;
+  }
+
+  .photo{
+    aspect-ratio:4/3;
+    background:var(--paper-alt);
+    border:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    position:relative;
+  }
+
+  .photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .photo .placeholder-label{
+    font-family:'Space Grotesk', monospace;
+    font-size:0.75rem;
+    color:#6b7268;
+    text-align:center;
+    padding:0 1rem;
+  }
+
+  footer{
+    padding:4vh 6vw 6vh;
+    border-top:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:1rem;
+    font-size:0.85rem;
+    color:#5a6359;
+  }
+
+  @media (max-width:640px){
+    header.site{padding:1.2rem 5vw;}
+    header.site nav a{margin-left:1rem; font-size:0.78rem;}
+    .finding{grid-template-columns:1fr; gap:0.8rem;}
+    .gallery{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <span class="mark">WNIOSKI&nbsp;/&nbsp;PROJEKT</span>
+  <nav>
+    <a href="#wstep">O projekcie</a>
+    <a href="#wnioski">Wnioski</a>
+    <a href="#rekomendacje">Rekomendacje</a>
+    <a href="#zdjecia">Zdjęcia</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <span class="eyebrow">Wyniki badania ankietowego</span>
+  <h1>Świadczenia pozafinansowe potrafią <span class="thesis-mark">ważyć tyle co pensja</span> — a czasem więcej.</h1>
+  <p class="lede">
+    Poniżej znajdują się kluczowe wnioski z badania oraz rekomendacje dla pracodawców,
+    które wynikają bezpośrednio z zebranych danych.
+  </p>
+</section>
+
+<section id="wstep">
+  <div class="section-head">
+    <h2>O projekcie</h2>
+    <span class="eyebrow">Wprowadzenie</span>
+  </div>
+
+  <div class="intro">
+    <p>
+      Ta strona poświęcona jest projektowi, w ramach którego zbadałem, jaki wpływ mają
+      świadczenia pozafinansowe na produktywność i decyzje zawodowe pracowników.
+      Punktem wyjścia było pytanie, czy pracownicy traktują takie świadczenia jako
+      dodatek bez większego znaczenia, czy jako czynnik realnie wpływający na to,
+      gdzie i jak chcą pracować.
+    </p>
+    <p>
+      Świadczenia pozafinansowe to wszystkie elementy oferty pracodawcy, które nie są
+      bezpośrednio wypłacane w gotówce, a mimo to mają wartość dla pracownika. Najczęściej
+      obejmują to:
+    </p>
+    <div class="benefit-examples">
+      → prywatna opieka medyczna<br>
+      → karta sportowa (np. Multisport)<br>
+      → praca zdalna lub hybrydowa<br>
+      → dofinansowanie dojazdów (transport publiczny, paliwo)<br>
+      → dodatkowe dni urlopu<br>
+      → elastyczne godziny pracy<br>
+      → budżet szkoleniowy / rozwojowy
+    </div>
+    <p>
+      Aby to zweryfikować, przeprowadziłem badanie ankietowe wśród pracowników firm z różnych
+      branż — m.in. handlu, ubezpieczeń i rozrywki. Wyniki potwierdziły postawioną tezę:
+      świadczenia pozafinansowe mają bardzo istotny wpływ na decyzje zawodowe, a dla części
+      pracowników bywają równie ważne, co samo wynagrodzenie — a czasem nawet ważniejsze.
+      Poniżej przedstawiam szczegółowe wnioski z badania oraz rekomendacje dla pracodawców.
+    </p>
+  </div>
+</section>
+
+<section id="wnioski">
+  <div class="section-head">
+    <h2>Wnioski</h2>
+    <span class="eyebrow">Siła wpływu na decyzję</span>
+  </div>
+
+  <div class="findings">
+
+    <div class="finding">
+      <p>Świadczenia pozafinansowe mają bardzo istotny wpływ na to, czy kandydat przyjmie daną ofertę pracy.</p>
+      <div class="weight">
+        <span class="weight-label">WYSOKI WPŁYW</span>
+        <div class="weight-track"><div class="weight-fill" style="width:90%"></div></div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <p>Część respondentów zadeklarowała, że wybrałaby ofertę z niższym wynagrodzeniem, jeśli oferowałaby lepszy pakiet benefitów pozafinansowych.</p>
+      <div class="weight">
+        <span class="weight-label">ISTOTNY WPŁYW</span>
+        <div class="weight-track"><div class="weight-fill" style="width:75%"></div></div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <p>Benefity pozafinansowe realnie wpływają na motywację do pracy w ocenie badanych.</p>
+      <div class="weight">
+        <span class="weight-label">ISTOTNY WPŁYW</span>
+        <div class="weight-track"><div class="weight-fill" style="width:80%"></div></div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <p>Najbardziej cenionymi benefitami okazały się praca zdalna oraz dofinansowanie transportu publicznego lub paliwa.</p>
+      <div class="weight">
+        <span class="weight-label">NAJWYŻEJ CENIONE</span>
+        <div class="weight-track"><div class="weight-fill" style="width:85%"></div></div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <p>Poziom oferowanych benefitów może przekładać się na ilość i jakość wykonywanej pracy, co ma znaczenie dla całej organizacji.</p>
+      <div class="weight">
+        <span class="weight-label">WPŁYW POŚREDNI</span>
+        <div class="weight-track"><div class="weight-fill" style="width:70%"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="rekomendacje">
+  <div class="section-head">
+    <h2>Rekomendacje</h2>
+    <span class="eyebrow">Dla pracodawców</span>
+  </div>
+
+  <div class="letter">
+    <p>
+      Wyniki tego badania pokazują wyraźnie: świadczenia pozafinansowe to nie dodatek
+      "na papierze", tylko realny argument, który waży w decyzji o przyjęciu oferty pracy
+      i w codziennej motywacji do jej wykonywania. Jeśli budżet na podwyżki jest ograniczony,
+      warto rozważyć te formy wsparcia jako sposób na zwiększenie atrakcyjności oferty bez
+      zwiększania kosztów wynagrodzeń.
+    </p>
+    <p>
+      Na podstawie zebranych odpowiedzi rekomenduję w pierwszej kolejności elastyczną pracę
+      zdalną lub hybrydową oraz dofinansowanie dojazdów — to właśnie te benefity respondenci
+      wskazywali najczęściej jako najbardziej wartościowe. Równie istotne jest, by wartość
+      oferowanego pakietu była jasno komunikowana już na etapie rekrutacji, ponieważ część
+      kandydatów podejmuje decyzję właśnie na tej podstawie.
+    </p>
+    <p class="signoff">— wnioski i rekomendacje na podstawie badania ankietowego</p>
+  </div>
+
+  <div class="recs">
+    <div class="rec">
+      <span class="num">01</span>
+      <h3>Elastyczna praca zdalna</h3>
+      <p>Wprowadź lub rozszerz opcje pracy zdalnej i hybrydowej — to najwyżej ceniony benefit w badaniu.</p>
+    </div>
+    <div class="rec">
+      <span class="num">02</span>
+      <h3>Dofinansowanie dojazdów</h3>
+      <p>Rozważ dopłaty do transportu publicznego lub paliwa jako niedrogi, wysoko ceniony benefit.</p>
+    </div>
+    <div class="rec">
+      <span class="num">03</span>
+      <h3>Komunikacja podczas rekrutacji</h3>
+      <p>Podkreślaj wartość pakietu pozafinansowego już na etapie oferty — realnie wpływa na decyzję kandydatów.</p>
+    </div>
+    <div class="rec">
+      <span class="num">04</span>
+      <h3>Monitorowanie satysfakcji</h3>
+      <p>Regularnie badaj, czy oferowane benefity wciąż odpowiadają oczekiwaniom zespołu.</p>
+    </div>
+    <div class="rec">
+      <span class="num">05</span>
+      <h3>Benefity jako element strategii</h3>
+      <p>Przy ograniczonym budżecie płacowym traktuj benefity pozafinansowe jako narzędzie utrzymania pracowników.</p>
+    </div>
+  </div>
+</section>
+
+<section id="zdjecia">
+  <div class="section-head">
+    <h2>Zdjęcia</h2>
+    <span class="eyebrow">Materiał wizualny</span>
+  </div>
+
+  <!--
+    JAK DODAĆ WŁASNE ZDJĘCIA:
+    1. Wrzuć pliki zdjęć do repozytorium, np. do folderu "images/" (images/foto1.jpg, images/foto2.jpg, images/foto3.jpg).
+    2. W każdym <div class="photo"> poniżej zamień zawartość na:
+       <img src="images/foto1.jpg" alt="Opis zdjęcia">
+       (usuń przy tym <span class="placeholder-label">...</span>)
+  -->
+  <div class="gallery">
+    <div class="photo"><span class="placeholder-label">images/foto1.jpg</span></div>
+    <div class="photo"><span class="placeholder-label">images/foto2.jpg</span></div>
+    <div class="photo"><span class="placeholder-label">images/foto3.jpg</span></div>
+  </div>
+</section>
+
+<footer>
+  <span>Projekt — wnioski i rekomendacje</span>
+  <span>Hubert · 2026</span>
+</footer>
+
+</body>
+</html>
